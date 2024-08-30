@@ -1,0 +1,22 @@
+{
+    "name": "hexlet/code",
+    "bin": [
+        "bin/gendiff"
+    ],
+    "description": "gendiff",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Roman\\PhpProject48\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Roman",
+            "email": "rnik82@mail.ru"
+        }
+    ],
+    "require": {
+        "docopt/docopt": "^1.0"
+    }
+}
