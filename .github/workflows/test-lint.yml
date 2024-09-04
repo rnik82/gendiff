@@ -1,0 +1,35 @@
+# file: .github/workflows/test-lint.yml
+name: test-lint
+# on – определяет события, которые запускают воркфлоу
+on: push
+jobs:
+  # build – произвольно выбранное имя задания
+  # их может быть больше одного
+  build:
+    # операционная система для работы воркфлоу
+    runs-on: ubuntu-latest
+    steps: # список шагов, которые надо выполнить
+      # экшен — выполняет какую-то задачу
+      # checkout — клонирует репозиторий
+      - uses: actions/checkout@v4
+      # run – произвольная bash-команда
+      - run: make test
+      - run: make lint
+      # Publish code coverage on Code Climate
+      # https://github.com/paambaati/codeclimate-action
+      # NOTE: uncomment for using workflow
+      - name: Run test & publish code coverage
+        uses: paambaati/codeclimate-action@v5
+        # Add Code Climate secret key
+        env:
+          CC_TEST_REPORTER_ID: ${{ TRIANGLE }}
+        with:
+          coverageCommand: make test-coverage
+          coverageLocations: build/logs/clover.xml:clover
+          debug: true
+        before_script:
+          - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          - chmod +x ./cc-test-reporter
+          - ./cc-test-reporter before-build
+        after_script:
+          - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
