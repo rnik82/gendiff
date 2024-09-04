@@ -1,26 +1,21 @@
 #!/usr/bin/env php
 <?php
 
-$doc = <<<DOC
+$autoloadPath1 = __DIR__ . '/../../../autoload.php';
+$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($autoloadPath1)) {
+    require_once $autoloadPath1;
+} else {
+    require_once $autoloadPath2;
+}
 
+use function Gendiff\Docopt\getPathToFiles;
+use function Gendiff\Plane\genDiff;
 
-Generate diff
+[$pathToFile1, $pathToFile2] = getPathToFiles();
 
-Usage:
-  gendiff (-h|--help)
-  gendiff (-v|--version)
-  gendiff [--format <fmt>] <firstFile> <secondFile>
-
-Options:
-  -h --help                     Show this screen
-  -v --version                  Show version
-  --format <fmt>                Report format [default: stylish]
-
-DOC;
-
-require('./vendor/docopt/docopt/src/docopt.php');
-
-$args = Docopt::handle($doc, array('version'=>'Naval Fate 2.0'));
-foreach ($args as $k=>$v)
-    echo $k.': '.json_encode($v).PHP_EOL;
+$diff = genDiff($pathToFile1, $pathToFile2);
+print_r("\n");
+print_r($diff);
+print_r("\n");
 
