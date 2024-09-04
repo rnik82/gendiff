@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1725478283">
-  <project timestamp="1725478283">
+<coverage generated="1725480303">
+  <project timestamp="1725480303">
     <file name="/home/roman/hexlet/php-project-48/src/Plane.php">
       <line num="9" type="stmt" count="1"/>
       <line num="14" type="stmt" count="1"/>
