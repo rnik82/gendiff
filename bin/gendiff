@@ -2,13 +2,16 @@
 <?php
 
 use function Gendiff\Docopt\run;
-
+// __DIR__ -> /home/roman/hexlet/php-project-48/bin
+// "/home/runner/work/php-project-48/php-project-48/vendor/autoload.php"
 $autoloadPath1 = __DIR__ . '/../../../autoload.php';
-$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+$autoloadPath2 = __DIR__ . '/vendor/autoload.php'; // /..
 if (file_exists($autoloadPath1)) {
     require_once $autoloadPath1;
 } else {
     require_once $autoloadPath2;
 }
+
+print_r(__DIR__);
 
 run();
