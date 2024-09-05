@@ -2,15 +2,11 @@
 
 namespace Gendiff\Docopt;
 
-function assemblePath($path)
-{
-    if (file_exists($path)) {
-        return $path;
-    }
-    return __DIR__ . "/../{$path}";
-}
+use Docopt;
 
-function getPathToFiles()
+use function Gendiff\Plane\genDiff;
+
+function run()
 {
     $doc = <<<DOC
 
@@ -28,9 +24,14 @@ function getPathToFiles()
   
     DOC;
 
-    $result = \Docopt::handle($doc, array('version' => 'Naval Fate 2.0'));
+    $params = [
+        'version' => '0.0.1'
+    ];
 
-    $pathToFile1 = assemblePath($result['<firstFile>']);
-    $pathToFile2 = assemblePath($result['<secondFile>']);
-    return [$pathToFile1, $pathToFile2];
+    $args = Docopt::handle($doc, $params);
+
+    $path1 = $args['<firstFile>'];
+    $path2 = $args['<secondFile>'];
+
+    genDiff($path1, $path2);
 }

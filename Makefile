@@ -7,9 +7,6 @@ gendiff:
  validate: # проверяет файл composer.json на ошибки
 	composer validate
 
-test: # запуск тестов
-	composer exec --verbose phpunit tests
-
 lint: # проверка кода на соответствие стандартам
 	composer exec --verbose phpcs -- --standard=PSR12 src bin
 

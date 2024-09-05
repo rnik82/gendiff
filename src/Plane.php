@@ -4,13 +4,24 @@ namespace Gendiff\Plane;
 
 use function Functional\sort;
 
+function assemblePath($path)
+{
+    if (file_exists($path)) {
+        return $path;
+    }
+    return __DIR__ . "/../{$path}";
+}
+
 function toString($value)
 {
     return trim(var_export($value, true), "'");
 }
 
-function genDiff($pathToFile1, $pathToFile2)
+function genDiff($path1, $path2)
 {
+    $pathToFile1 = assemblePath($path1);
+    $pathToFile2 = assemblePath($path2);
+
     $jsonStr1 = file_get_contents($pathToFile1);
     $jsonStr2 = file_get_contents($pathToFile2);
 
@@ -40,6 +51,7 @@ function genDiff($pathToFile1, $pathToFile2)
         }
     }, []);
 
-    $result = ['{', ...$lines, '}'];
-    return implode("\n", $result);
+    $result = implode("\n", ['{', ...$lines, '}']);
+    print_r($result);
+    print_r("\n");
 }
