@@ -54,4 +54,5 @@ function genDiff($path1, $path2)
     $result = implode("\n", ['{', ...$lines, '}']);
     print_r($result);
     print_r("\n");
+    return $result;
 }
