@@ -1,8 +1,11 @@
 install: # команда полезна при первом клонировании репозитория (или после удаления зависимостей)
 	composer install
 	
-gendiff:
+gendiff-json:
 	./bin/gendiff tests/fixtures/file1.json tests/fixtures/file2.json
+
+gendiff-yaml:
+	./bin/gendiff tests/fixtures/file1.yaml tests/fixtures/file2.yaml
 	
  validate: # проверяет файл composer.json на ошибки
 	composer validate

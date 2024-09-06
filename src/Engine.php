@@ -1,16 +1,9 @@
 <?php
 
-namespace Gendiff\Plane;
+namespace Gendiff\Engine;
 
 use function Functional\sort;
-
-function assemblePath($path)
-{
-    if (file_exists($path)) {
-        return $path;
-    }
-    return __DIR__ . "/../{$path}";
-}
+use function Gendiff\Parsers\parse;
 
 function toString($value)
 {
@@ -19,14 +12,8 @@ function toString($value)
 
 function genDiff($path1, $path2)
 {
-    $pathToFile1 = assemblePath($path1);
-    $pathToFile2 = assemblePath($path2);
-
-    $jsonStr1 = file_get_contents($pathToFile1);
-    $jsonStr2 = file_get_contents($pathToFile2);
-
-    $array1 = json_decode($jsonStr1, true); // associative array
-    $array2 = json_decode($jsonStr2, true); // associative array
+    $array1 = parse($path1); // associative array
+    $array2 = parse($path2); // associative array
 
     $keys1 = array_keys($array1);
     $keys2 = array_keys($array2);

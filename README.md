@@ -19,3 +19,6 @@ Project Gendiff helps you compare files in various formats and shows differences
 
     Compare plane JSON files
 <a href=https://asciinema.org/a/674675 target="_blank"><img src="https://asciinema.org/a/674675.svg" /></a>
+
+    Compare plane YAML (YML) files
+<a href=https://asciinema.org/a/675011 target="_blank"><img src="https://asciinema.org/a/675011.svg" /></a>

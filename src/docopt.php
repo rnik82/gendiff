@@ -4,7 +4,7 @@ namespace Gendiff\Docopt;
 
 use Docopt;
 
-use function Gendiff\Plane\genDiff;
+use function Gendiff\Engine\genDiff;
 
 function run()
 {
