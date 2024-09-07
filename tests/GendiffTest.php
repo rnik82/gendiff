@@ -8,33 +8,29 @@ use function Gendiff\Engine\genDiff;
 
 class GendiffTest extends TestCase
 {
-    private $expected;
+    protected $expected;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
-        $this->expected = file_get_contents(__DIR__ . "/fixtures/result.txt");
+        $this->expected = file_get_contents(realpath(__DIR__ . "/fixtures/result.txt"));
     }
 
-    public function getFixtureFullPath($fixtureName)
+    public static function extensionProvider()
     {
-        $parts = [__DIR__, 'fixtures', $fixtureName];
-        return realpath(implode('/', $parts));
+        return [
+            ['json'],
+            ['yaml']
+        ];
     }
 
-    public function testJson()
+    /**
+     * @dataProvider extensionProvider
+     */
+
+    public function testGenDiff($extension)
     {
-        $pathToFile1 = $this->getFixtureFullPath("file1.json");
-        $pathToFile2 = $this->getFixtureFullPath("file2.json");
-
-        $actual = genDiff($pathToFile1, $pathToFile2);
-
-        $this->assertEquals($this->expected, $actual);
-    }
-
-    public function testYaml()
-    {
-        $pathToFile1 = $this->getFixtureFullPath("file1.yaml");
-        $pathToFile2 = $this->getFixtureFullPath("file2.yaml");
+        $pathToFile1 = realpath(__DIR__ . "/fixtures/before.{$extension}");
+        $pathToFile2 = realpath(__DIR__ . "/fixtures/after.{$extension}");
 
         $actual = genDiff($pathToFile1, $pathToFile2);
 

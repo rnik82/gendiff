@@ -2,10 +2,10 @@ install: # команда полезна при первом клонирова�
 	composer install
 	
 gendiff-json:
-	./bin/gendiff tests/fixtures/file1.json tests/fixtures/file2.json
+	./bin/gendiff tests/fixtures/before.json tests/fixtures/after.json
 
 gendiff-yaml:
-	./bin/gendiff tests/fixtures/file1.yaml tests/fixtures/file2.yaml
+	./bin/gendiff tests/fixtures/before.yaml tests/fixtures/after.yaml
 	
  validate: # проверяет файл composer.json на ошибки
 	composer validate
