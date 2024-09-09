@@ -11,10 +11,7 @@
             "src/docopt.php",
             "src/Engine.php",
             "src/Parsers.php"
-        ],
-        "psr-4": {
-            "Roman\\PhpProject48\\": "src/"
-        }
+        ]
     },
     "authors": [
         {

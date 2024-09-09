@@ -1,5 +1,8 @@
 install: # команда полезна при первом клонировании репозитория (или после удаления зависимостей)
 	composer install
+
+update: # обновить зависимости
+	composer update
 	
 gendiff-json:
 	./bin/gendiff tests/fixtures/before.json tests/fixtures/after.json
@@ -25,4 +28,4 @@ test-coverage:
 test-coverage-text:
 	XDEBUG_MODE=coverage composer exec --verbose phpunit tests -- --coverage-text
 
-#.PHONY:
+#.PHONY: tests
