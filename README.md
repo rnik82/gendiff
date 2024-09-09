@@ -11,7 +11,7 @@
 
 ### To install:
     composer require global hexlet/code
-
+ 
 ### Gendiff training project
 Project Gendiff helps you compare files in various formats and shows differences in a convenient way (see examples below)
 
