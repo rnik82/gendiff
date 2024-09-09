@@ -13,8 +13,9 @@ gendiff-yaml:
  validate: # проверяет файл composer.json на ошибки
 	composer validate
 
-lint: # проверка кода на соответствие стандартам
-	composer exec --verbose phpcs -- --standard=PSR12 src bin
+lint:
+	composer exec --verbose phpcs -- --standard=PSR12 src tests
+	composer exec --verbose phpstan
 
 lint-fix:
 	composer exec --verbose phpcbf -- --standard=PSR12 src tests
