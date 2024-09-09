@@ -6,7 +6,7 @@ use Docopt;
 
 use function Gendiff\Engine\genDiff;
 
-function run()
+function run(): void
 {
     $doc = <<<DOC
 
@@ -30,8 +30,5 @@ function run()
 
     $args = Docopt::handle($doc, $params);
 
-    $path1 = $args['<firstFile>'];
-    $path2 = $args['<secondFile>'];
-
-    genDiff($path1, $path2);
+    genDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']);
 }

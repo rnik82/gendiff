@@ -4,7 +4,7 @@ namespace Gendiff\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
 
-function makePath($path)
+function makePath(string $path): string
 {
     if (file_exists($path)) {
         return $path;
@@ -12,7 +12,7 @@ function makePath($path)
     return __DIR__ . "/../{$path}";
 }
 
-function parse($path)
+function parse(string $path): mixed
 {
     $ext = pathinfo($path, PATHINFO_EXTENSION);
     $pathToFile = makePath($path);

@@ -5,12 +5,12 @@ namespace Gendiff\Engine;
 use function Functional\sort;
 use function Gendiff\Parsers\parse;
 
-function toString($value)
+function toString(mixed $value): string
 {
     return trim(var_export($value, true), "'");
 }
 
-function genDiff($path1, $path2)
+function genDiff(string $path1, string $path2): string
 {
     $array1 = parse($path1); // associative array
     $array2 = parse($path2); // associative array

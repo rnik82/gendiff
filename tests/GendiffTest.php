@@ -15,7 +15,7 @@ class GendiffTest extends TestCase
         $this->expected = file_get_contents(realpath(__DIR__ . "/fixtures/result.txt"));
     }
 
-    public static function extensionProvider()
+    public static function extensionProvider(): array
     {
         return [
             ['json'],
@@ -27,7 +27,7 @@ class GendiffTest extends TestCase
      * @dataProvider extensionProvider
      */
 
-    public function testGenDiff($extension)
+    public function testGenDiff(string $extension): void
     {
         $pathToFile1 = realpath(__DIR__ . "/fixtures/before.{$extension}");
         $pathToFile2 = realpath(__DIR__ . "/fixtures/after.{$extension}");
