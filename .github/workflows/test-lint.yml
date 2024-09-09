@@ -16,11 +16,11 @@ jobs:
       # https://github.com/shivammathur/setup-php
       
       - name: install project
-      - run: make install
+        run: make install
 
       - name: run linter
-      - run: make lint
-      
+        run: make lint
+
       # Publish code coverage on Code Climate
       # https://github.com/paambaati/codeclimate-action
       - name: Run test & publish code coverage
