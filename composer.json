@@ -8,7 +8,6 @@
     "license": "MIT",
     "autoload": {
         "files": [
-            "src/docopt.php",
             "src/Engine.php",
             "src/Parsers.php"
         ]

@@ -4,23 +4,22 @@ namespace Gendiff\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
 
-function makePath(string $path): string
-{
-    if (file_exists($path)) {
-        return $path;
-    }
-    return __DIR__ . "/../{$path}";
-}
-
 function parse(string $path): mixed
 {
+    // $absolutPath = __DIR__ . "/../{$path}";
+    if (!file_exists($path)) {
+        throw new \Exception("There is no any file here - {$path}");
+    }
     $ext = pathinfo($path, PATHINFO_EXTENSION);
-    $pathToFile = makePath($path);
-    $fileContent = file_get_contents($pathToFile);
+    $fileContent = file_get_contents($path);
+    if (!$fileContent) {
+        throw new \Exception("It wasn't possible to read the data on the file path - {$path}");
+    }
 
     $object = match ($ext) {
         'json' => json_decode($fileContent, false),
         'yml', 'yaml' => Yaml::parse($fileContent, Yaml::PARSE_OBJECT_FOR_MAP),
+        default => throw new \Exception("The extension {$path} is not supported"),
     };
-    return get_object_vars($object);
+    return $object; // get_object_vars($object)
 }
