@@ -4,11 +4,17 @@ install: # команда полезна при первом клонирова�
 update: # обновить зависимости
 	composer update
 	
-gendiff-json:
+gendiff-json-stylish:
 	./bin/gendiff tests/fixtures/before.json tests/fixtures/after.json
 
-gendiff-yaml:
+gendiff-yaml-stylish:
 	./bin/gendiff tests/fixtures/before.yaml tests/fixtures/after.yaml
+
+gendiff-json-plain:
+	./bin/gendiff tests/fixtures/before.json tests/fixtures/after.json --format plain
+
+gendiff-yaml-plain:
+	./bin/gendiff tests/fixtures/before.yaml tests/fixtures/after.yaml --format plain
 	
  validate: # проверяет файл composer.json на ошибки
 	composer validate

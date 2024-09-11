@@ -4,15 +4,16 @@ namespace Gendiff\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-use function Gendiff\Engine\genDiff;
+use function Differ\Differ\genDiff;
 
 class GendiffTest extends TestCase
 {
-    private string $expected;
+    private string $expectedStylish;
+    private string $expectedPlain;
 
-    protected function setUp(): void
+    private function getFileContent($fileName): string
     {
-        $path = realpath(__DIR__ . "/fixtures/result.txt");
+        $path = realpath(__DIR__ . "/fixtures/{$fileName}");
         if (!$path) {
             throw new \Exception("It wasn't possible to generate path to file");
         }
@@ -20,7 +21,13 @@ class GendiffTest extends TestCase
         if (!$content) {
             throw new \Exception("It wasn't possible to read the data on the file path");
         }
-        $this->expected = $content;
+        return $content;
+    }
+
+    protected function setUp(): void
+    {
+        $this->expectedStylish = $this->getFileContent("result-stylish.txt");
+        $this->expectedPlain = $this->getFileContent("result-plain.txt");
     }
 
     public static function extensionProvider(): array
@@ -44,8 +51,23 @@ class GendiffTest extends TestCase
             throw new \Exception("It wasn't possible to generate path to file(s)");
         }
 
-        $actual = genDiff($pathToFile1, $pathToFile2);
+        $actualStylish = genDiff($pathToFile1, $pathToFile2);
+        $this->assertEquals($this->expectedStylish, $actualStylish);
 
-        $this->assertEquals($this->expected, $actual);
+        $actualPlain = genDiff($pathToFile1, $pathToFile2, 'plain');
+        $this->assertEquals($this->expectedPlain, $actualPlain);
     }
+
+    // public function testGenDiffPlain(string $extension): void
+    // {
+    //     $pathToFile1 = realpath(__DIR__ . "/fixtures/before.{$extension}");
+    //     $pathToFile2 = realpath(__DIR__ . "/fixtures/after.{$extension}");
+
+    //     if (!$pathToFile1 || !$pathToFile2) {
+    //         throw new \Exception("It wasn't possible to generate path to file(s)");
+    //     }
+
+    //     $actualPlain = genDiff($pathToFile1, $pathToFile2, 'plain');
+    //     $this->assertEquals($this->expectedPlain, $actualPlain);
+    // }
 }

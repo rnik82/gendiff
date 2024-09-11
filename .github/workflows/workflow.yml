@@ -1,5 +1,5 @@
-# file: .github/workflows/test-lint.yml
-name: test-lint
+# file: .github/workflows/workflow.yml
+name: workflow
 # on – определяет события, которые запускают воркфлоу
 on: push
 jobs:

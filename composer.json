@@ -8,8 +8,12 @@
     "license": "MIT",
     "autoload": {
         "files": [
-            "src/Engine.php",
-            "src/Parsers.php"
+            "src/Differ.php",
+            "src/Parsers.php",
+            "src/Formatters.php",
+            "src/Formatters/stylish.php",
+            "src/Formatters/plain.php",
+            "src/AstBuilder.php"
         ]
     },
     "authors": [

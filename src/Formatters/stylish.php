@@ -1,31 +1,13 @@
 <?php
 
-namespace Gendiff\Engine;
+namespace Gendiff\Formatters\Stylish;
 
 use function Functional\sort;
-use function Gendiff\Parsers\parse;
-
-// const ADDED = "+ ";
-// const DELETED = "- ";
-// const KEPT = "  ";
 
 function toString(mixed $value): string
 {
     $string = trim(var_export($value, true), "'");
     return $string === 'NULL' ? 'null' : $string;
-}
-
-function genDiff(string $path1, string $path2, string $format = 'stylish'): string
-{
-    $data1 = parse($path1); // associative array
-    $data2 = parse($path2); // associative array
-
-    $dataDiff = '';
-    if ($format === 'stylish') {
-        $dataDiff = stylish($data1, $data2);
-    }
-    print_r($dataDiff);
-    return $dataDiff;
 }
 
 function stylish(object $data1, object $data2, int $depth = 1): string
