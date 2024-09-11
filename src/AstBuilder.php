@@ -35,12 +35,11 @@ function makeAst(object $data1, object $data2): array
                 ];
             return $node;
         }
-        if (array_key_exists($key, $data1Array) 
-            && array_key_exists($key, $data2Array)) {
+        if (array_key_exists($key, $data1Array) && array_key_exists($key, $data2Array)) {
             $newValue1 = is_object($value1) ? makeInner($value1) : toString($value1);
             $newValue2 = is_object($value2) ? makeInner($value2) : toString($value2);
-            //$type1 = 
-            if ($value1 === $value2) { // allways two plain
+
+            if ($value1 === $value2) {// allways two plain
                 $node = [
                     'name' => $key,
                     'type' => getType($value1),
@@ -79,7 +78,6 @@ function makeAst(object $data1, object $data2): array
             'value' => $newValue2,
             ];
         return $node;
-
     }, $sortedKeys);
     return $result;
 }

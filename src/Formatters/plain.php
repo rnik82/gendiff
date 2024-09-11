@@ -14,7 +14,12 @@ function buildPaths(array $ast, array $path = []): array
 
         if ($status === 'removed') {
             $line = "Property '{$currentPath}' was removed";
-            return [...$acc, $line];
+            print_r("!!!!!!!!!!!!!!!!!!!!!");
+            print_r("\n");
+            print_r(gettype($acc));
+            print_r("\n");
+            $acc[] = $line; // [...$acc, $line]
+            return $acc;
         }
 
         if ($status === 'added') {
@@ -22,7 +27,8 @@ function buildPaths(array $ast, array $path = []): array
             $value = $type === 'complex' ? '[complex value]' : $node['value'];
             $valueUpd = addApostrophes($value);
             $line = "Property '{$currentPath}' was added with value: {$valueUpd}";
-            return [...$acc, $line];
+            $acc[] = $line; // [...$acc, $line]
+            return $acc;
         }
 
         if ($status === 'updated') {
@@ -33,18 +39,18 @@ function buildPaths(array $ast, array $path = []): array
             $oldValueUpd = addApostrophes($oldValue);
             $newValueUpd = addApostrophes($newValue);
             $line = "Property '{$currentPath}' was updated. From {$oldValueUpd} to {$newValueUpd}";
-            return [...$acc, $line];
+            $acc[] = $line; // [...$acc, $line]
+            return $acc;
         }
 
         $type = $node['type'];
 
         // farther unchanged cases
-        if ($type === 'plain') { 
+        if ($type === 'plain') {
             return $acc;
         }
         $innerLines = buildPaths($node['value'], $path);
         return [...$acc, ...$innerLines];
-
     }, []);
     return $result;
 }

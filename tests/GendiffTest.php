@@ -11,7 +11,7 @@ class GendiffTest extends TestCase
     private string $expectedStylish;
     private string $expectedPlain;
 
-    private function getFileContent($fileName): string
+    private function getFileContent(string $fileName): string
     {
         $path = realpath(__DIR__ . "/fixtures/{$fileName}");
         if (!$path) {

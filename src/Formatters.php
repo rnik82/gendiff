@@ -6,7 +6,7 @@ use function Gendiff\Formatters\Stylish\stylish;
 use function Gendiff\Formatters\Plain\plain;
 use function Gendiff\AstBuilder\makeAst;
 
-function getDiff($data1, $data2, $format)
+function getDiff(object $data1, object $data2, string $format): string
 {
     $dataDiff = '';
     if ($format === 'stylish') {

@@ -4,10 +4,10 @@ namespace Differ\Differ;
 
 use function Gendiff\Parsers\parse;
 use function Gendiff\Formatters\getDiff;
+
 // use function Gendiff\Formatters\Stylish\stylish;
 // use function Gendiff\Formatters\Plain\plain;
 // use function Gendiff\AstBuilder\makeAst;
-
 // const ADDED = "+ ";
 // const DELETED = "- ";
 // const KEPT = "  ";
