@@ -15,6 +15,12 @@ gendiff-json-plain:
 
 gendiff-yaml-plain:
 	./bin/gendiff tests/fixtures/before.yaml tests/fixtures/after.yaml --format plain
+
+gendiff-json-json:
+	./bin/gendiff tests/fixtures/before.json tests/fixtures/after.json --format json
+
+gendiff-yaml-json:
+	./bin/gendiff tests/fixtures/before.yaml tests/fixtures/after.yaml --format json
 	
  validate: # проверяет файл composer.json на ошибки
 	composer validate

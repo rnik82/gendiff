@@ -10,6 +10,7 @@ class GendiffTest extends TestCase
 {
     private string $expectedStylish;
     private string $expectedPlain;
+    private string $expectedJson;
 
     private function getFileContent(string $fileName): string
     {
@@ -28,6 +29,7 @@ class GendiffTest extends TestCase
     {
         $this->expectedStylish = $this->getFileContent("result-stylish.txt");
         $this->expectedPlain = $this->getFileContent("result-plain.txt");
+        $this->expectedJson = $this->getFileContent("result-json.txt");
     }
 
     public static function extensionProvider(): array
@@ -56,18 +58,8 @@ class GendiffTest extends TestCase
 
         $actualPlain = genDiff($pathToFile1, $pathToFile2, 'plain');
         $this->assertEquals($this->expectedPlain, $actualPlain);
+
+        $actualJson = genDiff($pathToFile1, $pathToFile2, 'json');
+        $this->assertEquals($this->expectedJson, $actualJson);
     }
-
-    // public function testGenDiffPlain(string $extension): void
-    // {
-    //     $pathToFile1 = realpath(__DIR__ . "/fixtures/before.{$extension}");
-    //     $pathToFile2 = realpath(__DIR__ . "/fixtures/after.{$extension}");
-
-    //     if (!$pathToFile1 || !$pathToFile2) {
-    //         throw new \Exception("It wasn't possible to generate path to file(s)");
-    //     }
-
-    //     $actualPlain = genDiff($pathToFile1, $pathToFile2, 'plain');
-    //     $this->assertEquals($this->expectedPlain, $actualPlain);
-    // }
 }

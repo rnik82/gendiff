@@ -6,20 +6,19 @@ use Symfony\Component\Yaml\Yaml;
 
 function parse(string $path): mixed
 {
-    // $absolutPath = __DIR__ . "/../{$path}";
     if (!file_exists($path)) {
-        throw new \Exception("There is no any file here - {$path}");
+        throw new \Exception(sprintf("There is no any file here - %s", $path));
     }
     $ext = pathinfo($path, PATHINFO_EXTENSION);
     $fileContent = file_get_contents($path);
     if (!$fileContent) {
-        throw new \Exception("It wasn't possible to read the data on the file path - {$path}");
+        throw new \Exception(sprintf("It's impossible to read the data on the file path %s", $path));
     }
 
     $object = match ($ext) {
         'json' => json_decode($fileContent, false),
         'yml', 'yaml' => Yaml::parse($fileContent, Yaml::PARSE_OBJECT_FOR_MAP),
-        default => throw new \Exception("The extension {$path} is not supported"),
+        default => throw new \Exception(sprintf("The extension %s is not supported", $ext))
     };
-    return $object; // get_object_vars($object)
+    return $object;
 }

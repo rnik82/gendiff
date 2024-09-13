@@ -4,17 +4,17 @@ namespace Gendiff\Formatters;
 
 use function Gendiff\Formatters\Stylish\stylish;
 use function Gendiff\Formatters\Plain\plain;
+use function Gendiff\Formatters\Json\json;
 use function Gendiff\AstBuilder\makeAst;
 
 function getDiff(object $data1, object $data2, string $format): string
 {
-    $dataDiff = '';
-    if ($format === 'stylish') {
-        $dataDiff = stylish($data1, $data2);
-    }
-    if ($format === 'plain') {
-        $ast = makeAst($data1, $data2);
-        $dataDiff = plain($ast);
-    }
-    return $dataDiff;
+    $ast = makeAst($data1, $data2);
+
+    return match ($format) {
+        'stylish' => stylish($ast),
+        'plain' => plain($ast),
+        'json' => json($ast),
+        default => throw new \Exception(sprintf("Unknown format - %s", $format))
+    };
 }

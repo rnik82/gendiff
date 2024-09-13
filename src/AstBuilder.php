@@ -25,55 +25,56 @@ function makeAst(object $data1, object $data2): array
         $value1 = $data1Array[$key] ?? null;
         $value2 = $data2Array[$key] ?? null;
 
-        if (is_object($value1) &&  is_object($value2)) { // allways two complex
+        if (is_object($value1) &&  is_object($value2)) {
             $newValue = makeAst($value1, $value2);
             $node = [
-                'name' => $key,
-                'type' => 'complex',
+                'key' => $key,
                 'status' => 'unchanged',
                 'value' => $newValue,
                 ];
             return $node;
         }
         if (array_key_exists($key, $data1Array) && array_key_exists($key, $data2Array)) {
-            $newValue1 = is_object($value1) ? makeInner($value1) : toString($value1);
-            $newValue2 = is_object($value2) ? makeInner($value2) : toString($value2);
+            $newValue1 = is_object($value1) ? getInnerObject($value1)
+            : toString($value1);
 
-            if ($value1 === $value2) {// allways two plain
+            $newValue2 = is_object($value2) ? getInnerObject($value2)
+            : toString($value2);
+
+            if ($value1 === $value2) {
                 $node = [
-                    'name' => $key,
-                    'type' => getType($value1),
+                    'key' => $key,
                     'status' => 'unchanged',
                     'value' => $newValue1,
                     ];
                 return $node;
             }
-            if ($value1 !== $value2) { // can be both: one - plain, one - complex
+            if ($value1 !== $value2) {
                 $node = [
-                    'name' => $key,
-                    'oldType' => getType($value1), // !!!!!!!!
-                    'newType' => getType($value2),
+                    'key' => $key,
                     'status' => 'updated',
-                    'oldValue' => $newValue1,
+                    'value' => $newValue1,
                     'newValue' => $newValue2
                     ];
                 return $node;
             }
         }
         if (array_key_exists($key, $data1Array)) {
-            $newValue1 = is_object($value1) ? makeInner($value1) : toString($value1);
+            $newValue1 = is_object($value1) ? getInnerObject($value1)
+            : toString($value1);
+
             $node = [
-                'name' => $key,
-                'type' => getType($value1),
+                'key' => $key,
                 'status' => 'removed',
                 'value' => $newValue1,
                 ];
             return $node;
         }
-        $newValue2 = is_object($value2) ? makeInner($value2) : toString($value2);
+        $newValue2 = is_object($value2) ? getInnerObject($value2)
+        : toString($value2);
+
         $node = [
-            'name' => $key,
-            'type' => getType($value2),
+            'key' => $key,
             'status' => 'added',
             'value' => $newValue2,
             ];
@@ -82,31 +83,23 @@ function makeAst(object $data1, object $data2): array
     return $result;
 }
 
-function getType(mixed $value): string
+function getInnerObject(object $object): array
 {
-    return is_object($value) ? 'complex' : 'plain';
-}
-
-//json_encode ?
-function makeInner(object $object): array
-{
-    $array = get_object_vars($object); // get array from object
+    $array = get_object_vars($object);
     $keys = array_keys($array);
     return array_map(function ($key) use ($array) {
         $value = $array[$key];
         if (is_object($value)) {
-            $nested = makeInner($value);
+            $nested = getInnerObject($value);
             $node = [
-                'name' => $key,
-                'type' => 'complex',
+                'key' => $key,
                 'status' => 'unchanged',
                 'value' => $nested,
                 ];
             return $node;
         }
         $node = [
-            'name' => $key,
-            'type' => 'plain',
+            'key' => $key,
             'status' => 'unchanged',
             'value' => $value,
             ];

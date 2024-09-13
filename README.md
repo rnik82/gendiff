@@ -14,14 +14,17 @@ Project Gendiff helps to compare files in various formats and shows differences 
 
 ### Examples
 
-    Compare plane JSON files
+    Compare JSON files
 <a href=https://asciinema.org/a/674675 target="_blank"><img src="https://asciinema.org/a/674675.svg" /></a>
 
-    Compare plane YAML (YML) files
+    Compare YAML (YML) files
 <a href=https://asciinema.org/a/675011 target="_blank"><img src="https://asciinema.org/a/675011.svg" /></a>
 
-    Compare plane JSON and YAML files with default format "stylish"
+    Compare JSON and YAML files with default format "stylish"
 <a href=https://asciinema.org/a/675493 target="_blank"><img src="https://asciinema.org/a/675493.svg" /></a>
 
-    Compare plane JSON and YAML files with default format "plain"
+    Compare JSON and YAML files with format "plain"
 <a href=https://asciinema.org/a/675642 target="_blank"><img src="https://asciinema.org/a/675642.svg" /></a>
+
+    Compare JSON and YAML files with format "json"
+<a href=https://asciinema.org/a/675901 target="_blank"><img src="https://asciinema.org/a/675901.svg" /></a>
