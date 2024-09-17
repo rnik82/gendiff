@@ -50,7 +50,7 @@ function getDisplayOfValue(mixed $value): mixed
 {
     $updView = is_array($value) ? '[complex value]' : $value;
     $exceptionList = ['true', 'false', 'null', '[complex value]'];
-    return in_array($updView, $exceptionList) ? $updView : "'{$updView}'";
+    return in_array($updView, $exceptionList, true) ? $updView : "'{$updView}'";
 }
 
 function plain(array $ast): string
