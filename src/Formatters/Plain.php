@@ -10,11 +10,11 @@ function buildPaths(array $ast, array $path = []): array
         $key = $node['key'];
         $value = $node['value'];
 
-        $path = [...$path, $key];
-        $currentPath = implode(".", $path);
+        $newPath = [...$path, $key];
+        $currentPath = implode(".", $newPath);
 
         if ($status === 'unchanged' && is_array($value)) {
-            $innerLines = buildPaths($value, $path);
+            $innerLines = buildPaths($value, $newPath);
             $newAcc = array_merge($acc, $innerLines);
             return $newAcc;
         }
