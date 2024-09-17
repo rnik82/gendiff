@@ -31,7 +31,7 @@ function makeAst(object $data1, object $data2): array
                 'key' => $key,
                 'status' => 'unchanged',
                 'value' => $newValue,
-                ];
+            ];
             return $node;
         }
         if (array_key_exists($key, $data1Array) && array_key_exists($key, $data2Array)) {
@@ -46,7 +46,7 @@ function makeAst(object $data1, object $data2): array
                     'key' => $key,
                     'status' => 'unchanged',
                     'value' => $newValue1,
-                    ];
+                ];
                 return $node;
             }
             if ($value1 !== $value2) {
@@ -55,7 +55,7 @@ function makeAst(object $data1, object $data2): array
                     'status' => 'updated',
                     'value' => $newValue1,
                     'newValue' => $newValue2
-                    ];
+                ];
                 return $node;
             }
         }
@@ -67,7 +67,7 @@ function makeAst(object $data1, object $data2): array
                 'key' => $key,
                 'status' => 'removed',
                 'value' => $newValue1,
-                ];
+            ];
             return $node;
         }
         $newValue2 = is_object($value2) ? getInnerObject($value2)
@@ -77,7 +77,7 @@ function makeAst(object $data1, object $data2): array
             'key' => $key,
             'status' => 'added',
             'value' => $newValue2,
-            ];
+        ];
         return $node;
     }, $sortedKeys);
     return $result;
@@ -95,14 +95,14 @@ function getInnerObject(object $object): array
                 'key' => $key,
                 'status' => 'unchanged',
                 'value' => $nested,
-                ];
+            ];
             return $node;
         }
         $node = [
             'key' => $key,
             'status' => 'unchanged',
             'value' => $value,
-            ];
+        ];
         return $node;
     }, $keys);
 }

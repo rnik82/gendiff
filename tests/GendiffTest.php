@@ -16,11 +16,11 @@ class GendiffTest extends TestCase
     {
         $path = realpath(__DIR__ . "/fixtures/{$fileName}");
         if (!$path) {
-            throw new \Exception("It wasn't possible to generate path to file");
+            throw new \Exception("It is impossible to generate path to file");
         }
         $content = file_get_contents($path);
         if (!$content) {
-            throw new \Exception("It wasn't possible to read the data on the file path");
+            throw new \Exception("It is impossible to read the data on the file path");
         }
         return $content;
     }
@@ -53,7 +53,10 @@ class GendiffTest extends TestCase
             throw new \Exception("It wasn't possible to generate path to file(s)");
         }
 
-        $actualStylish = genDiff($pathToFile1, $pathToFile2);
+        $actualStylishByDefalt = genDiff($pathToFile1, $pathToFile2);
+        $this->assertEquals($this->expectedStylish, $actualStylishByDefalt);
+
+        $actualStylish = genDiff($pathToFile1, $pathToFile2, 'stylish');
         $this->assertEquals($this->expectedStylish, $actualStylish);
 
         $actualPlain = genDiff($pathToFile1, $pathToFile2, 'plain');
