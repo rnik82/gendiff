@@ -49,7 +49,7 @@ function buildPaths(array $ast, array $path = []): array
 function getDisplayOfValue(mixed $value): mixed
 {
     $updView = is_array($value) ? '[complex value]' : $value;
-    $exceptionList = ['true', 'false', 'null', '[complex value]'];
+    $exceptionList = ['true', 'false', 'null', '[complex value]', '0'];
     return in_array($updView, $exceptionList, true) ? $updView : "'{$updView}'";
 }
 
