@@ -11,7 +11,7 @@ function parse(string $path): mixed
     }
     $ext = pathinfo($path, PATHINFO_EXTENSION);
     $fileContent = file_get_contents($path);
-    if (!$fileContent) {
+    if ($fileContent === false) {
         throw new \Exception(sprintf("It's impossible to read the data on the file path %s", $path));
     }
 

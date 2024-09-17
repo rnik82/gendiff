@@ -11,8 +11,8 @@ function genDiff(string $path1, string $path2, string $format = 'stylish'): stri
     $data2 = parse($path2);
 
     $dataDiff = getDiff($data1, $data2, $format);
-    print_r("\n");
-    print_r($dataDiff);
-    print_r("\n");
+    // print_r("\n");
+    echo $dataDiff;
+    // print_r("\n");
     return $dataDiff;
 }

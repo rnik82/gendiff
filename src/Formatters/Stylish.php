@@ -20,29 +20,23 @@ function stylish(array $ast, int $depth = 1): string
         $key = $node['key'];
 
         $valueUpd = is_array($value) ? stylish($value, $depth + 1) : $value;
-        $line = '';
         switch ($status) {
             case 'unchanged':
-                $line = "{$currentIndent}  {$key}: {$valueUpd}";
-                break;
-            case 'updated': // rtrim(..., ' ')
+                return "{$currentIndent}  {$key}: {$valueUpd}";
+            case 'updated':
                 $newValue = $node['newValue'];
                 $newValueUpd = is_array($newValue) ? stylish($newValue, $depth + 1)
                 : $newValue;
-                $line = "{$currentIndent}- {$key}: {$valueUpd}"
+                return "{$currentIndent}- {$key}: {$valueUpd}"
                 . "\n{$currentIndent}+ {$key}: {$newValueUpd}";
-                break;
             case 'removed':
-                $line = "{$currentIndent}- {$key}: {$valueUpd}";
-                break;
+                return "{$currentIndent}- {$key}: {$valueUpd}";
             case 'added':
-                $line = "{$currentIndent}+ {$key}: {$valueUpd}";
-                break;
+                return "{$currentIndent}+ {$key}: {$valueUpd}";
             default:
                 throw new \Exception(sprintf("There is invalid ast tree."
                 . "It is imposible to find status - %s", $status));
         }
-        return $line;
     }, $ast);
 
     $result = ['{', ...$lines, "{$bracketIndent}}"];
