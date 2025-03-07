@@ -7,7 +7,6 @@
 ## Gendiff (Difference Calculator)
 
 ### About the Project:
-    composer require global hexlet/code
  
 Difference Calculator is a program that determines the difference between two data structures. This is a popular problem,
 and there are many online services available to solve it, such as: http://www.jsondiff.com/. A similar mechanism is used
@@ -56,27 +55,27 @@ Follow these steps sequentially:
 Commands to run the program:
 
 - `./bin/gendiff -h` — display help.
-- `./bin/gendiff --format stylish file1.json file2.json` — compare JSON files in stylish format
-- `./bin/gendiff --format stylish file1.yml file2.yml` — compare YAML files in stylish format
-- `./bin/gendiff --format plain file1.json file2.json` — compare JSON files in plain format
-- `./bin/gendiff --format plain file1.yml file2.yml` — compare YAML files in plain format
-- `./bin/gendiff --format json file1.json file2.json` — compare JSON files in JSON format
-- `./bin/gendiff --format json file1.yml file2.yml` — compare YAML files in JSON format
+- `./bin/gendiff file1.json file2.json --format stylish` — compare JSON files in stylish format
+- `./bin/gendiff file1.yml file2.yml --format stylish` — compare YAML files in stylish format
+- `./bin/gendiff file1.json file2.json --format plain` — compare JSON files in plain format
+- `./bin/gendiff file1.yml file2.yml --format plain` — compare YAML files in plain format
+- `./bin/gendiff file1.json file2.json --format json` — compare JSON files in JSON format
+- `./bin/gendiff file1.yml file2.yml --format json` — compare YAML files in JSON format
 - `./bin/gendiff file1.json file2.json` — if no format is specified, stylish will be used by default
 
 ## Demonstration
 
-#### Example of comparing JSON files
+#### Displaying help and example of comparing JSON files
 [![asciicast](https://asciinema.org/a/674675.svg)](https://asciinema.org/a/674675)
 
 #### Example of comparing YAML (YML) files
 [![asciicast](https://asciinema.org/a/675011.svg)](https://asciinema.org/a/675011)
 
-#### Example of comparing JSON and YAML files with default stylish format
+#### Example of comparing JSON and YAML files with nested structure in default stylish format
 [![asciicast](https://asciinema.org/a/675493.svg)](https://asciinema.org/a/675493)
 
-#### Example of comparing JSON and YAML files with plain format
+#### Example of comparing JSON and YAML files with nested structure in plain format
 [![asciicast](https://asciinema.org/a/675642.svg)](https://asciinema.org/a/675642)
 
-#### Example of comparing JSON and YAML files with json format
+#### Example of comparing JSON and YAML files with nested structure in json format
 [![asciicast](https://asciinema.org/a/675901.svg)](https://asciinema.org/a/675901)
